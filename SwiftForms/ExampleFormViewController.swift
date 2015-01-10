@@ -22,6 +22,7 @@ class ExampleFormViewController: FormViewController, FormViewControllerDelegate 
         static let check = "check"
         static let segmented = "segmented"
         static let picker = "picker"
+        static let pickerWithTwoComponent = "twoComponentPicker"
         static let birthday = "birthday"
         static let categories = "categories"
         static let button = "button"
@@ -138,6 +139,12 @@ class ExampleFormViewController: FormViewController, FormViewControllerDelegate 
                 return nil
             }
         }
+        section5.addRow(row)
+        
+        // picker with two component cell
+        row = FormRowDescriptor(tag: Static.pickerWithTwoComponent, rowType: FormRowType.TwoComponentPicker, title: "City")
+        row.pickerDatasourceWithTwoComponent = ["China": ["BeiJing", "HangZhou", "ShangHai"],
+                                                "America": ["NewYork", "Californian", "San Francisco"]]
         section5.addRow(row)
 
         row = FormRowDescriptor(tag: Static.birthday, rowType: .Date, title: "Birthday")
