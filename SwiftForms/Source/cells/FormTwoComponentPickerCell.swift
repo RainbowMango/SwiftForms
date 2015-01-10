@@ -44,15 +44,19 @@ class FormTwoComponentPickerCell: FormValueCell, UIPickerViewDelegate, UIPickerV
     }
     
     override class func formViewController(formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
-        /*Initialize component array and selected value */
         let row = selectedRow as FormTwoComponentPickerCell
-        row.firstComponentArray_ = Array(row.rowDescriptor.pickerDatasourceWithTwoComponent.keys)
-        row.firstComponentValue_ = row.firstComponentArray_[0]
-        row.secondComponentArray_ = row.rowDescriptor.pickerDatasourceWithTwoComponent[row.firstComponentValue_]
-        row.secondComponentValue_ = row.secondComponentArray_[0]
         
-        row.rowDescriptor.value = "\(row.firstComponentValue_)-\(row.secondComponentValue_)"
-        row.valueLabel.text = "\(row.firstComponentValue_)-\(row.secondComponentValue_)"
+        /*Initialize component array and selected value for first time selected */
+        if((row.valueLabel.text?.isEmpty) == nil) {
+            row.firstComponentArray_ = Array(row.rowDescriptor.pickerDatasourceWithTwoComponent.keys)
+            row.firstComponentValue_ = row.firstComponentArray_[0]
+            row.secondComponentArray_ = row.rowDescriptor.pickerDatasourceWithTwoComponent[row.firstComponentValue_]
+            row.secondComponentValue_ = row.secondComponentArray_[0]
+            
+            row.rowDescriptor.value = "\(row.firstComponentValue_)-\(row.secondComponentValue_)"
+            row.valueLabel.text = "\(row.firstComponentValue_)-\(row.secondComponentValue_)"
+        }
+        
         row.hiddenTextField.becomeFirstResponder()
     }
     
